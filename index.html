@@ -1,33 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>KOBY ❤️</title>
+
+<style>
+body{
+text-align:center;
+font-family:Arial;
+margin-top:80px;
+background:#fff0f5;
+overflow:hidden;
+}
+
+button{
+padding:15px 30px;
+font-size:20px;
+margin:20px;
+border-radius:10px;
+border:none;
+}
+
+#no{
+position:absolute;
+background:#ccc;
+}
+
+#yes{
+background:#ff4d6d;
+color:white;
+}
+
+.heart{
+position:fixed;
+color:red;
+font-size:20px;
+animation:fall 5s linear infinite;
+}
+
+@keyframes fall{
+0%{top:-10px;}
+100%{top:100vh;}
+}
+</style>
+</head>
+
+<body>
+
+<h1>Veux-tu épouser ton petit KOBY ? 💍❤️</h1>
+
+<input id="name" placeholder="Ton prénom ❤️"><br><br>
+
+<button id="yes" onclick="oui()">Oui</button>
+<button id="no">Non</button>
+
+<audio id="music" loop>
+<source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
+</audio>
+
 <script>
 
 const no = document.getElementById("no");
 
-no.addEventListener("mouseover", ()=>{
-    no.style.left = Math.random()*300+"px";
-    no.style.top = Math.random()*300+"px";
+no.addEventListener("mouseover",()=>{
+no.style.left=Math.random()*300+"px";
+no.style.top=Math.random()*300+"px";
 });
 
 function pluie(){
-    for(let i=0;i<30;i++){
-        let h=document.createElement("div");
-        h.className="heart";
-        h.innerHTML="❤️";
-        h.style.left=Math.random()*100+"%";
-        h.style.animationDuration=(Math.random()*3+2)+"s";
-        document.body.appendChild(h);
-    }
+for(let i=0;i<30;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"%";
+h.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(h);
+}
 }
 
 function oui(){
-    let nom = document.getElementById("name").value || "Elle";
-    let heure = new Date().toLocaleTimeString();
 
-    // Affichage du message directement sur la page
-    document.body.innerHTML = `<h1>${nom} a dit OUI ❤️💍 à KOBY à ${heure}</h1>
-                               <h2>Je t’aime mon cœur ❤️</h2>`;
+let nom=document.getElementById("name").value || "Elle";
+let heure=new Date().toLocaleTimeString();
 
-    pluie();
-    document.getElementById("music").play();
+let phone="225XXXXXXXX";
+let apikey="TON_API_KEY";
+
+let msg=`${nom} a dit OUI ❤️💍 à KOBY à ${heure}`;
+
+fetch(`https://api.callmebot.com/whatsapp.php?phone=${phone}&text=${encodeURIComponent(msg)}&apikey=${apikey}`);
+
+document.body.innerHTML="<h1>Je t’aime mon cœur ❤️💍</h1>";
+
+pluie();
+document.getElementById("music").play();
 }
 
 </script>
+
+</body>
+</html>
